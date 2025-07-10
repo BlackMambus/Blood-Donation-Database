@@ -1,0 +1,51 @@
+-- Donors Table
+CREATE TABLE Donors (
+    donor_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    gender VARCHAR(10),
+    date_of_birth DATE,
+    blood_type VARCHAR(3),
+    phone VARCHAR(15),
+    email VARCHAR(100),
+    address TEXT,
+    last_donation_date DATE
+);
+
+-- Donations Table
+CREATE TABLE Donations (
+    donation_id INT PRIMARY KEY AUTO_INCREMENT,
+    donor_id INT,
+    donation_date DATE,
+    blood_type VARCHAR(3),
+    volume_ml INT,
+    location VARCHAR(100),
+    FOREIGN KEY (donor_id) REFERENCES Donors(donor_id)
+);
+
+-- Blood Inventory Table
+CREATE TABLE BloodInventory (
+    inventory_id INT PRIMARY KEY AUTO_INCREMENT,
+    blood_type VARCHAR(3),
+    volume_ml INT,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Requests Table
+CREATE TABLE Requests (
+    request_id INT PRIMARY KEY AUTO_INCREMENT,
+    requester_name VARCHAR(100),
+    hospital_name VARCHAR(100),
+    blood_type VARCHAR(3),
+    volume_ml INT,
+    request_date DATE,
+    status VARCHAR(50) DEFAULT 'Pending'
+);
+
+-- Staff Table (optional)
+CREATE TABLE Staff (
+    staff_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    role VARCHAR(50),
+    phone VARCHAR(15),
+    email VARCHAR(100)
+);
